@@ -12,21 +12,37 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     fun getSeatsStatus (counter: Int, binding: ActivityMainBinding){
 
-        if (counter == 0) {
-            binding.textCenter.text = SeatsStatus.ALL_SEATS_FREE.value
-            SeatsStatus.ALL_SEATS_FREE.setAllSeatsFreeStyle(binding)
-        } else {
-            binding.textCenter.text = SeatsStatus.SEATS_LEFT.value + (maxSeats - counter).toString()
-        }
-        if (counter <= maxSeats && counter > 0) {
-            SeatsStatus.SEATS_LEFT.setSeatsLeftStyle(binding)
-        }
-        if (counter > maxSeats) {
-                binding.textCenter.text = SeatsStatus.BUST.value
-            SeatsStatus.BUST.setBustStyle(binding)
+//        if (counter == 0) {
+//            binding.textCenter.text = SeatsStatus.ALL_SEATS_FREE.value
+//            SeatsStatus.ALL_SEATS_FREE.setAllSeatsFreeStyle(binding)
+//        } else {
+//            binding.textCenter.text = SeatsStatus.SEATS_LEFT.value + (maxSeats - counter).toString()
+//        }
+//        if (counter in 1..maxSeats) {
+//            SeatsStatus.SEATS_LEFT.setSeatsLeftStyle(binding)
+//        }
+//        if (counter > maxSeats) {
+//            binding.textCenter.text = SeatsStatus.BUST.value
+//            SeatsStatus.BUST.setBustStyle(binding)
+//        }
+
+        when {
+            counter != 0 -> {
+                binding.textCenter.text = SeatsStatus.SEATS_LEFT.value + (maxSeats - counter).toString()
+                when {
+                    counter in 1..maxSeats -> SeatsStatus.SEATS_LEFT.setSeatsLeftStyle(binding)
+                    counter > maxSeats -> {
+                        binding.textCenter.text = SeatsStatus.BUST.value
+                        SeatsStatus.BUST.setBustStyle(binding)
+                    }
+                }
+            }
+            else -> {
+                binding.textCenter.text = SeatsStatus.ALL_SEATS_FREE.value
+                SeatsStatus.ALL_SEATS_FREE.setAllSeatsFreeStyle(binding)
+            }
         }
         binding.textCounter.text = (counter).toString()
-
     }
 
 
