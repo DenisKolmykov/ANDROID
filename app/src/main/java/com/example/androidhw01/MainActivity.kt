@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.example.androidhw01.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-    var seatsCounter = 0
+    private var seatsCounter = 0
     private val maxSeats = 49
 
     @SuppressLint("SetTextI18n")
